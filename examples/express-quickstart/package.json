@@ -1,0 +1,13 @@
+{
+  "name": "rbac-core-express-quickstart",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@okeav/rbac-core-standalone": "file:../..",
+    "express": "^5.2.1"
+  }
+}
