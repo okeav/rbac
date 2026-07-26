@@ -1,4 +1,4 @@
-# @okeav/rbac-core-standalone — Express quickstart
+# @okeav/rbac-core — Express quickstart
 
 Runnable in under a minute. No database, no docker, no config file — this
 package is pure in-memory functions plus Express middleware.

@@ -1,4 +1,4 @@
-# @okeav/rbac-core-standalone
+# @okeav/rbac-core
 
 A standalone, framework-agnostic RBAC engine for Node.js/TypeScript backends, built around a five-axis account model:
 
@@ -15,10 +15,10 @@ This package has no dependency on any specific identity/authentication layer. It
 ## Install
 
 ```
-npm install @okeav/rbac-core-standalone
+npm install @okeav/rbac-core
 ```
 
-Express integration is an optional peer dependency — only needed if you use `@okeav/rbac-core-standalone/middleware/express`.
+Express integration is an optional peer dependency — only needed if you use `@okeav/rbac-core/middleware/express`.
 
 ## Local development
 
@@ -42,7 +42,7 @@ The package never hardcodes these values — it takes a **registry** (your scope
 ## Quick start
 
 ```js
-import { createPermissionRegistry, getPermissions, hasPermission, buildScopeCatalogue } from '@okeav/rbac-core-standalone';
+import { createPermissionRegistry, getPermissions, hasPermission, buildScopeCatalogue } from '@okeav/rbac-core';
 
 // 1. Build your scope catalogue (your domain's resource/action vocabulary).
 const catalogue = buildScopeCatalogue({
@@ -80,7 +80,7 @@ hasPermission(ctx, 'job.publish', registry); // => true
 Scopes follow the `resource.action` or `resource.action.qualifier` grammar (the qualifier convention — e.g. `.own` / `.any` — is your naming choice, not enforced by the package).
 
 ```js
-import { matchScope } from '@okeav/rbac-core-standalone';
+import { matchScope } from '@okeav/rbac-core';
 
 matchScope(['job.*'], 'job.read');                    // true  — resource wildcard
 matchScope(['*'], 'anything.at.all');                  // true  — global wildcard
@@ -95,7 +95,7 @@ matchScope(['*.read.*'], 'application.read.own');       // true
 Real account models usually only allow a handful of legal combinations (e.g. "a BUSINESS admin never has a userType", "a MEMBER's userType must match the account's subtype"). This package doesn't know your combinations — you register them as predicates:
 
 ```js
-import { createShapeRegistry } from '@okeav/rbac-core-standalone';
+import { createShapeRegistry } from '@okeav/rbac-core';
 
 const shapes = createShapeRegistry([
   (ctx) => ctx.accountType === 'BUSINESS' && ctx.role === 'ADMIN' && ctx.userType == null,
@@ -114,7 +114,7 @@ Fail-closed by design: if a stored account record doesn't match any registered s
 This package has no dependency on any specific identity provider or token format — including `@adaptive-edge/idp-core`. Identity providers authenticate *who* is calling; this package answers *what they're allowed to do*, given claims that carry your RBAC fields. `fromClaims` adapts whatever claim shape your identity layer produces into a `PermissionContext`:
 
 ```js
-import { fromClaims, getPermissions } from '@okeav/rbac-core-standalone';
+import { fromClaims, getPermissions } from '@okeav/rbac-core';
 
 // Default claim key names: accountType, accountSubType, role, userType, capabilities
 const ctx = fromClaims(jwtPayload);
@@ -133,7 +133,7 @@ This keeps the package usable whether your claims come from `@adaptive-edge/idp-
 Import from the `/middleware/express` subpath so the core package never pulls in an Express type dependency for consumers who only need the pure functions.
 
 ```js
-import { createScopeMiddleware, createCapabilityMiddleware, createRequireRole, createRequireAccountType } from '@okeav/rbac-core-standalone/middleware/express';
+import { createScopeMiddleware, createCapabilityMiddleware, createRequireRole, createRequireAccountType } from '@okeav/rbac-core/middleware/express';
 
 const { requireScope, requireAllScopes } = createScopeMiddleware();
 const { requireCapability } = createCapabilityMiddleware();
@@ -159,7 +159,7 @@ createScopeMiddleware({
 Every function that throws uses the single `RbacError` type — never shapes an HTTP response itself:
 
 ```js
-import { RbacError, isRbacError, ERROR_CODES } from '@okeav/rbac-core-standalone';
+import { RbacError, isRbacError, ERROR_CODES } from '@okeav/rbac-core';
 
 app.use((err, req, res, next) => {
   if (isRbacError(err)) return res.status(err.httpStatus).json({ code: err.code, message: err.message });

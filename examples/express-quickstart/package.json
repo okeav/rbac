@@ -7,7 +7,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "@okeav/rbac-core-standalone": "file:../..",
+    "@okeav/rbac-core": "file:../..",
     "express": "^5.2.1"
   }
 }

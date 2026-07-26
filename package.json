@@ -1,5 +1,5 @@
 {
-  "name": "@okeav/rbac-core-standalone",
+  "name": "@okeav/rbac-core",
   "version": "0.1.0",
   "description": "Standalone, pluggable RBAC engine for Node.js/TypeScript backends — accountType/accountSubType/role/userType/capabilities permission model, wildcard scope matching, and framework middleware. Bring your own scope catalogue and identity claims.",
   "type": "module",

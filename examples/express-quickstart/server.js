@@ -5,8 +5,8 @@ import {
     createShapeRegistry,
     fromClaims,
     getPermissions,
-} from '@okeav/rbac-core-standalone';
-import { createScopeMiddleware, createCapabilityMiddleware } from '@okeav/rbac-core-standalone/middleware/express';
+} from '@okeav/rbac-core';
+import { createScopeMiddleware, createCapabilityMiddleware } from '@okeav/rbac-core/middleware/express';
 
 // ── Domain: a small project-management app ───────────────────────────────
 // Deliberately NOT the same domain as this package's own test fixtures —
