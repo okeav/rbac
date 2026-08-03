@@ -46,6 +46,7 @@ Every file carries the same YAML frontmatter (`title`, `package`, `category`, `t
 | [express-quickstart.md](examples/express-quickstart.md) | Full runnable server: registry, shapes, fake login, route guards |
 | [capability-layering.md](examples/capability-layering.md) | Granting a feature-area capability without changing a user's role |
 | [custom-context-source.md](examples/custom-context-source.md) | Reading auth context from `req.user`/a session instead of `req.auth`, custom error shaping |
+| [idp-core-integration.md](examples/idp-core-integration.md) | Full wiring with `@okeav/idp-core` — `resolveAuthContext`, the `req.auth.claims` shape mismatch, and shared error handling |
 
 ## Source of truth
 

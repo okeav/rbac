@@ -62,3 +62,6 @@ verified claims.
   rather than calling `fromClaims` itself; wiring an upstream auth middleware to populate
   `req.auth` from `fromClaims`'s output (plus a resolved `scopes` list) is the intended pattern —
   see that page's default-context shape.
+- [Wiring Up with @okeav/idp-core](../examples/idp-core-integration.md) — a full worked example,
+  including the one shape mismatch you'll actually hit (idp-core nests claims under
+  `req.auth.claims`; rbac-core's defaults read a flat `req.auth`).
